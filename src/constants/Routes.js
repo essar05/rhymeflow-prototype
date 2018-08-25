@@ -1,15 +1,11 @@
 import React from 'react'
+import Game from '../containers/Game'
 
 export const getRoutes = () => {
     return [
         {
             path: '/',
-            exact: true,
-            component: () => (<div>Hello World</div>)
-        },
-        {
-            path: '/muiepsd',
-            component: () => (<div>Muie PSD</div>)
+            component: Game
         }
     ];
 };

@@ -11,6 +11,7 @@
     "core-js": "^2.5.5",
     "jquery": "^3.3.1",
     "prop-types": "^15.6.0",
+    "query-string": "^6.1.0",
     "raf": "^3.4.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
