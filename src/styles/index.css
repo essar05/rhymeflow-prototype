@@ -4,3 +4,7 @@ body {
     font-family: 'Cuprum',sans-serif;
     background-color: #edeff1;
 }
+
+main {
+    padding-top: 15px;
+}

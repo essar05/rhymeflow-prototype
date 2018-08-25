@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
-import SpotifyAPI, { setAuthenticationToken } from '../services/SpotifyAPI'
+import { toast } from 'react-toastify';
+import SpotifyAPI, { setAuthenticationToken } from '../services/SpotifyAPI';
 
 export const initAuth = () => (dispatch) => {
     const accessToken = localStorage.getItem('spotifyAccessToken');
@@ -13,11 +14,17 @@ export const initAuth = () => (dispatch) => {
 
 export const getAuthenticatedUser = () => async (dispatch, getState) => {
     const requested = getState().session.user !== null;
-    if(requested) return;
+    if (requested) return;
 
     dispatch(setUserRequesting());
-    const user = await SpotifyAPI.get('/me');
-    dispatch(login(user.data));
+    try {
+        const response = await SpotifyAPI.get('/me');
+        dispatch(login(response.data));
+    } catch(error) {
+        toast.error('You have been logged out');
+        dispatch(setUserRequesting(false));
+        dispatch(logout());
+    }
 };
 
 export const logout = () => {

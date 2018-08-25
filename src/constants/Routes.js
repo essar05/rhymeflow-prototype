@@ -1,4 +1,3 @@
-import React from 'react'
 import Game from '../containers/Game'
 import DoLogout from '../containers/DoLogout'
 
