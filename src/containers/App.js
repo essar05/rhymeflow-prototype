@@ -7,8 +7,8 @@ import { getRoutes } from "../constants/Routes";
 import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { initAuth, getAuthenticatedUser } from "../actions/Session";
-import Login from "../components/Login";
-import DoLogin from "../components/DoLogin";
+import RequireAuthentication from "../components/RequireAuthentication";
+import NavBar from "../components/NavBar";
 
 class App extends React.Component {
 
@@ -16,43 +16,34 @@ class App extends React.Component {
         this.props.initAuth();
     }
 
-    componentDidUpdate() {
-    }
-
     render() {
         const { isAuthenticated } = this.props;
 
         return (
-            <div>
+            <React.Fragment>
                 <ToastContainer transition={Flip}/>
 
-                <main>
-                    <div className="container-fluid">
-                        {
-                            !isAuthenticated &&
-                            <Switch>
-                                <Route path='/login' exact component={DoLogin} />
-                                <Route path='/' component={Login} />
-                            </Switch>
-                        }
+                <RequireAuthentication>
+                    <NavBar />
 
-                        {
-                            isAuthenticated &&
+                    <main>
+                        <div className="container-fluid">
                             <Switch>
                                 {getRoutes().reverse().map(({path, exact = false, component}) => (
                                     <Route path={path} exact={exact} component={component} key={path} />
                                 ))}
                             </Switch>
-                        }
-                    </div>
-                </main>
-            </div>
+                        </div>
+                    </main>
+                </RequireAuthentication>
+            </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.session.isAuthenticated
+    isAuthenticated: state.session.isAuthenticated,
+    user: state.session.user
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

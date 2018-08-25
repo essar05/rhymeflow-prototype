@@ -10,9 +10,9 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div>
-                Welcome {this.props.user['display_name']}
-            </div>
+            <React.Fragment>
+
+            </React.Fragment>
         );
     }
 
