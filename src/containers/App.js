@@ -17,9 +17,6 @@ class App extends React.Component {
     }
 
     componentDidUpdate() {
-        if(this.props.isAuthenticated) {
-            this.props.getAuthenticatedUser();
-        }
     }
 
     render() {
