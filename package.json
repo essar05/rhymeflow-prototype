@@ -1,0 +1,33 @@
+{
+  "name": "rhymeflow-prototype",
+  "version": "0.1.0",
+  "homepage": ".",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.14"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "core-js": "^2.5.5",
+    "jquery": "^3.3.1",
+    "prop-types": "^15.6.0",
+    "raf": "^3.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-fontawesome": "^1.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-breadcrumbs-hoc": "^1.0.5",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.8",
+    "react-toastify": "^4.1.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
