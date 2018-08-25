@@ -1,4 +1,6 @@
 import React from 'react';
+import {Button} from "reactstrap";
+import '../styles/Login.css'
 
 const redirectToSpotify = () => {
     window.location.href = 'https://accounts.spotify.com/authorize' +
@@ -9,8 +11,10 @@ const redirectToSpotify = () => {
 
 const Login = () => {
     return (
-        <div>
-            <button onClick={redirectToSpotify}>Login with Spotify</button>
+        <div className="login-container">
+            <h1>RhymeFlow</h1>
+            <br />
+            <Button color='primary' onClick={redirectToSpotify}>Login with Spotify</Button>
         </div>
     );
 };

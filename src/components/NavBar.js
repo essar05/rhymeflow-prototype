@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
-import { Nav, NavItem, Navbar, NavbarBrand } from "reactstrap";
+import {Nav, NavItem, Navbar, NavbarBrand, NavLink} from "reactstrap";
+import '../styles/NavBar.css'
 
 const NavBar = ({user}) => {
     if(user === null) return '';
@@ -11,7 +12,10 @@ const NavBar = ({user}) => {
 
             <Nav horizontal='end' className='ml-auto' navbar>
                 <NavItem>
-                    <span className='text-white'>Welcome, {user['display_name']}</span>
+                    <span className='text-white nav-text'>Welcome, {user['display_name']}</span>
+                </NavItem>
+                <NavItem>
+                    <NavLink href='/logout'>Logout</NavLink>
                 </NavItem>
             </Nav>
         </Navbar>

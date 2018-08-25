@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { initAuth, getAuthenticatedUser } from "../actions/Session";
 import RequireAuthentication from "../components/RequireAuthentication";
 import NavBar from "../components/NavBar";
+import LoadingSplash from "../components/LoadingSplash";
 
 class App extends React.Component {
 
@@ -17,25 +18,30 @@ class App extends React.Component {
     }
 
     render() {
-        const { isAuthenticated } = this.props;
+        const { isLoading } = this.props;
 
         return (
             <React.Fragment>
                 <ToastContainer transition={Flip}/>
 
-                <RequireAuthentication>
-                    <NavBar />
+                { isLoading ?
+                    <LoadingSplash />
+                    :
+                    <RequireAuthentication>
 
-                    <main>
-                        <div className="container-fluid">
-                            <Switch>
-                                {getRoutes().reverse().map(({path, exact = false, component}) => (
-                                    <Route path={path} exact={exact} component={component} key={path} />
-                                ))}
-                            </Switch>
-                        </div>
-                    </main>
-                </RequireAuthentication>
+                        <NavBar />
+
+                        <main>
+                            <div className="container-fluid">
+                                <Switch>
+                                    {getRoutes().reverse().map(({path, exact = false, component}) => (
+                                        <Route path={path} exact={exact} component={component} key={path}/>
+                                    ))}
+                                </Switch>
+                            </div>
+                        </main>
+                    </RequireAuthentication>
+                }
             </React.Fragment>
         );
     }
@@ -43,6 +49,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.session.isAuthenticated,
+    isLoading: state.session.isRequesting,
     user: state.session.user
 });
 
