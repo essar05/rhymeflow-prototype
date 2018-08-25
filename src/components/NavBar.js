@@ -8,7 +8,7 @@ const NavBar = ({user}) => {
 
     return (
         <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/">RhymeFlow</NavbarBrand>
+            <NavbarBrand className='logo' href="/">RhymeFlow</NavbarBrand>
 
             <Nav horizontal='end' className='ml-auto' navbar>
                 <NavItem>

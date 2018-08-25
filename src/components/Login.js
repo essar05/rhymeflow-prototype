@@ -13,7 +13,7 @@ const redirectToSpotify = () => {
 const Login = () => {
     return (
         <div className="login-container">
-            <h1>RhymeFlow</h1>
+            <h1 className='logo'>RhymeFlow</h1>
             <br />
             <Button color='primary' onClick={redirectToSpotify}>Login with Spotify</Button>
         </div>
