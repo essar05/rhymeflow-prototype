@@ -17,18 +17,26 @@ export const play = () => async (dispatch, getState) => {
     try {
         await SpotifyAPI.put('/me/player/play', data);
 
+        //set up an interval running once every 100ms, that queries spotify to get the playback.
+        // this is to ensure playback has started on the server
         let intervalId = setInterval(async () => {
             dispatch(getPlaybackStatus((isPlaying) => {
+                //we have received an error, clear the interval otherwise it might run ad infinitum
                 if(isPlaying === null){
                     clearInterval(intervalId);
                 }
                 if(isPlaying === true) {
+                    //if playback has started on spotify, clear this interval
+                    //and set up another one running every second
                     clearInterval(intervalId);
                     intervalId = setInterval(async () => {
                         dispatch(getPlaybackStatus((isPlaying) => {
+                            //clear interval on error
                             if(isPlaying === null){
                                 clearInterval(intervalId);
                             }
+                            //if playback stopped, time to clear this interval, as well as the increment position one
+                            //and dispatch a player pause action
                             if(isPlaying === false) {
                                 clearInterval(intervalId);
                                 clearInterval(getState().player.intervalId);
@@ -57,10 +65,9 @@ export const pause = () => async (dispatch, getState) => {
 
         clearInterval(getState().player.intervalId);
 
-        /*
         dispatch({
             type: types.PLAYER_PAUSE
-        });*/
+        });
     } catch(error) {
         toast.error('Error occurred while trying to pause playback');
     }
@@ -81,6 +88,8 @@ export const getPlaybackStatus = (callback) => async (dispatch, getState) => {
             startPosition: response.data.progress_ms
         });
 
+        // if we're playing, we updated the position of the player from spotify
+        // and starting from there, we'll be counting ourselves every 0.05 seconds
         if(response.data.is_playing) {
             let intervalId = setInterval(() => {
                 dispatch({
