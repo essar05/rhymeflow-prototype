@@ -16,17 +16,33 @@ export const play = () => async (dispatch, getState) => {
 
     try {
         await SpotifyAPI.put('/me/player/play', data);
+
         dispatch({
             type: types.PLAYER_PLAY
         });
+
+        let intervalId = setInterval(() => {
+            dispatch({
+                type: types.PLAYER_INCREMENT_POSITION
+            });
+        }, 50);
+
+        dispatch({
+            type: types.PLAYER_SET_INTERVAL_ID,
+            intervalId
+        });
+
+
     } catch(error) {
         toast.error('Unknown error occurred while trying to start playback');
     }
 };
 
-export const pause = () => async (dispatch) => {
+export const pause = () => async (dispatch, getState) => {
     try {
         await SpotifyAPI.put('/me/player/pause');
+
+        clearInterval(getState().player.intervalId);
 
         dispatch({
             type: types.PLAYER_PAUSE

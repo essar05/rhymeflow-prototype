@@ -1,9 +1,14 @@
 import * as types from '../constants/ActionTypes';
+import {getDeltaTime} from "../utils/TimeUtils";
 
 const initialState = {
     isPlaying: false,
     isPaused: false,
-    trackId: '7KXjTSCq5nL1LoYtL7XAwS'
+    currentPosition: 0,
+    startPosition: 0,
+    intervalId: null,
+    startTime: null,
+    trackId: ''
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +18,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isPlaying: true,
-                isPaused: false
+                isPaused: false,
+                startTime: new Date(),
+                startPosition: state.currentPosition
             };
 
         case types.PLAYER_PAUSE:
@@ -28,7 +35,21 @@ export default (state = initialState, action) => {
                 ...state,
                 isPlaying: false,
                 isPaused: false,
+                currentPosition: 0,
                 trackId: action.trackId
+            };
+
+        case types.PLAYER_INCREMENT_POSITION:
+            const currentTime = new Date();
+            return {
+                ...state,
+                currentPosition: state.startPosition + getDeltaTime(state.startTime, currentTime)
+            };
+
+        case types.PLAYER_SET_INTERVAL_ID:
+            return {
+                ...state,
+                intervalId: action.intervalId
             };
 
         default:

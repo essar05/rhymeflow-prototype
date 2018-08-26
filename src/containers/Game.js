@@ -3,6 +3,7 @@ import {bindActionCreators} from "redux";
 import connect from "react-redux/es/connect/connect";
 import {Button, Col, Row} from "reactstrap";
 import {play,pause,setTrack} from "../actions/Player";
+import AnalysisTimeline from '../components/AnalysisTimeline'
 
 class Game extends React.Component {
 
@@ -41,6 +42,7 @@ class Game extends React.Component {
                     </Col>
                 </Row>
                 <br/>
+                <AnalysisTimeline />
                 <Row>
                     <Col>
                         [Intro]<br />
