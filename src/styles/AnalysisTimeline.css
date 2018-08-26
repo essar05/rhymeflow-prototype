@@ -1,0 +1,29 @@
+.analysis-timeline-wrapper {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.analysis-timeline {
+    height: 150px;
+    width: 4000%;
+    background-color: #ddd;
+    color: #fff;
+    border: 1px solid #000;
+    position: relative;
+}
+
+.analysis-timeline .cursor {
+    height: 100%;
+    width: 2px;
+    background-color: #000;
+    position: absolute;
+}
+
+.analysis-timeline .entry {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
