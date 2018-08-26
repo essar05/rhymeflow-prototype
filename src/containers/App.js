@@ -31,11 +31,11 @@ class App extends React.Component {
 
                         <NavBar />
 
-                        <main>
+                        <main tabIndex={0} onKeyPress={this.onKeyPressed}>
                             <div className="container-fluid">
                                 <Switch>
                                     {getRoutes().reverse().map(({path, exact = false, component}) => (
-                                        <Route path={path} exact={exact} component={component} key={path}/>
+                                        <Route path={path} exact={exact} component={component} key={path} />
                                     ))}
                                 </Switch>
                             </div>

@@ -32,7 +32,7 @@ class AnalysisTimeline extends React.Component {
 
         this.timelineRef = React.createRef();
 
-        this.onKeyPressed = this.onKeyPressed.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     componentDidUpdate() {
@@ -45,8 +45,11 @@ class AnalysisTimeline extends React.Component {
         }
     }
 
-    onKeyPressed(e) {
+    onKeyDown(e) {
+        if(e.keyCode !== 32) return;
         if(!this.props.isPlaying) return;
+
+        e.preventDefault();
 
         const { words } = this.state;
         const { position } = this.props;
@@ -88,9 +91,17 @@ class AnalysisTimeline extends React.Component {
         });
     }
 
+    componentWillMount(){
+        document.addEventListener("keydown", this.onKeyDown.bind(this));
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.onKeyDown.bind(this));
+    }
+
     render() {
         return (
-            <div tabIndex={0} onKeyPress={this.onKeyPressed}>
+            <div>
                 isPlaying: {this.props.isPlaying ? "yes" : "no"} <br/>
                 position: {this.props.position}
                 <p>{this.state.currentBar > -1 ? this.state.words[this.state.currentBar][this.state.currentWord] : '-'}</p>
