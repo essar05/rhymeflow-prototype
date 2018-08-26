@@ -7,7 +7,7 @@ const redirectToSpotify = () => {
         '?client_id=b653abd1e6034e239ff50710f73a210e' +
         '&response_type=token' +
         '&redirect_uri=' + encodeURI('http://localhost:3000/login') +
-        '&scope=' + encodeURI('user-modify-playback-state');
+        '&scope=' + encodeURI('user-modify-playback-state user-read-currently-playing user-read-playback-state');
 };
 
 const Login = () => {

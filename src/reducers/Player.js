@@ -19,7 +19,6 @@ export default (state = initialState, action) => {
                 ...state,
                 isPlaying: true,
                 isPaused: false,
-                startTime: new Date(),
                 startPosition: state.currentPosition
             };
 
@@ -50,6 +49,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 intervalId: action.intervalId
+            };
+
+        case types.PLAYER_GET_PLAYBACK_STATUS:
+            return {
+                ...state,
+                isPlaying: action.isPlaying,
+                duration: action.duration,
+                currentPosition: action.currentPosition,
+                startPosition: action.startPosition,
+                startTime: action.isPlaying ? new Date(): null
             };
 
         default:
